@@ -1,6 +1,11 @@
 //Elise Soto Coding 1 Spring 2026
 //My first C++ program
 
+// to compile, open the 'Developer Command Prompt for VS 2022'
+// navigate to this folder with 'cd' for 'change directory'
+// use the command 'cl /EHsc filename.cpp' (in this case, it's 'main.cpp')
+// and then type 'filename' to run the .exe (in this case, it's 'main')
+
 #include <iostream>                     //  in out stream, for sending text to the console
 #include <string>                       // for player name
 
