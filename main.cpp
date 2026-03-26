@@ -1,0 +1,28 @@
+//Elise Soto Coding 1 Spring 2026
+//My first C++ program
+
+#include <iostream>                     //  in out stream, for sending text to the console
+#include <string>                       // for player name
+
+using namespace std;                    //  so we don't have to type "std::" all the time
+
+//here is where we start the program
+int main() {
+    // variables declared at top is the best practice.
+    string playerName;                  // variables use camelCase
+
+    // ask the player for their name
+    cout << "What is your name, player? ";
+
+    //assign whatever player types as value of playerName
+    cin >> playerName;
+
+    // greet the player by name
+    cout << "Hello " <<playerName << "!" << endl;
+
+    // user Control+slash to comment out lines.
+    // cout << "Hello World!" << endl;   //  cout = console out, endl = end line
+
+    return 0;       // end the program
+    }
+
