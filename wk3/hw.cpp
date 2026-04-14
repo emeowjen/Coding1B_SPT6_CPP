@@ -1,6 +1,7 @@
 // Elise Soto Coding 1 Spring 2026
 // Trying to do "things"
 // Maybe Rock Paper Scissors?
+// create a .cpp program that will allow the user to add a game, edit, remove, and show all (sorted), quit
 
 #include <iostream>
 #include <string>
