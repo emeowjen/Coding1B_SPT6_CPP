@@ -25,7 +25,11 @@ using namespace std;
 // get prompt input
 // create fav games list
 
-
+void showVec (vector<string>& vec) {
+    for(int i = 0; i < vec.size(); i++) {
+        cout << vec[i] << endl;
+    }
+}
 
 int main() {
     cout << "Let's do some stuff today!\n";
@@ -39,12 +43,10 @@ int main() {
     vector<string> favGames;
 
     if(playerName == "Elise") {
-        favGames.push_back("Project Zomboid");
-        favGames.push_back("Minecraft");
-        favGames.push_back("The Sims 4");
-        favGames.push_back("Roblox");
-        favGames.push_back("Outer Worlds");
-
+        favGames= {"Minecraft", "Roblox", "Project Zomboid"};
+        cout << "Let's look at your favorite games.\n";
+    
+        showVec(favGames);
     }
 
     else{
@@ -57,21 +59,35 @@ int main() {
     
     do{
 
-        cout << "You can 'add', 'edit', 'remove', 'show all', or 'quit'.\n";
+        cout << "You can 'show all', 'add' , 'edit', 'remove', or 'quit'.\n";
         cout << "What would you like to do?\n";
-
         getline(cin, input);
 
-        if(input == "add") {
-            cout << "Let's compile a list of our favorite games! What would you like to add?\n";
-            
+        if(input == "show all") {
+            cout << "Ok, let's look at a list of our favorite games again!\n";
+            cout << "Here's that list\n";
+            showVec(favGames);
 
-            if (input == "yes") {
+        }
+
+        else if(input == "add") {
+            cout << "What would you like to add?\n";
+            getline(cin, input);
+
+            cout << "Would you like to add more games?\n";
+            getline(cin, input);
+
+            if(input == "yes") {
+                getline(cin, input);
 
             }
 
-            else if (input == "no") {
+            if(input == "no") {
                 
+            }
+
+            else {
+                cout << "I don't understand this command.\n";
             }
 
         }
@@ -82,11 +98,8 @@ int main() {
         else if(input == "remove") {
         }
 
-        else if(input == "show all") {
-        }
-
         else if(input == "quit") {
-            cout << "Thanks for playing!\n";
+            cout << "Smell ya later!\n";
             break;
         }
 
