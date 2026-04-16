@@ -101,7 +101,7 @@ int main(){
     cout << "Finally, functions!\n";
 
     showVec(names);
-    addStringToVec(names);
+    addStringToVec();
     sayHello();
 
     cout << "Let's roll a dice. Our first number is " << dieRoll(6) << ".\n";
