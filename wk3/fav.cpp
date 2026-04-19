@@ -31,6 +31,7 @@ using namespace std;
     // sorted alphabetically
 // 'add' command
 // 'edit' command
+    // double check if that's what they really wanna do
 // 'remove' command
 // 'quit' command
 // return 0 (end)
