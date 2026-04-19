@@ -45,7 +45,7 @@ int main() {
     vector<string> favGames;
 
     if(playerName == "Elise") {
-        favGames= {"Minecraft", "Roblox", "Project Zomboid"};
+        favGames= {"Minecraft", "Roblox", "Project Zomboid", "Terraria", "The Sims 4", "Doki Doki Literature Club"};
         cout << "\nLet's look at your favorite games.\n";
     
         showVec(favGames);
@@ -69,6 +69,7 @@ int main() {
         if(input == "show all") {
             cout << "Ok, let's look at a list of our favorite games again!\n";
             cout << "Here's that list.\n\n";
+            sort(favGames.begin(), favGames.end());
             showVec(favGames);
             cout << "\n";
 
