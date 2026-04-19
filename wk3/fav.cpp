@@ -32,16 +32,6 @@ void showVec (vector<string>& vec) {
     }
 }
 
-void addStringToVec (vector<string>& vec) {
-    cout << "What name would you like to add?\n";
-    string input;
-    getline(cin, input);
-
-    vec.push_back(input);
-
-    showVec(vec); // added name exists here
-}
-
 int main() {
     srand(time(0));
     cout << "Let's do some stuff today!\n";
@@ -56,9 +46,10 @@ int main() {
 
     if(playerName == "Elise") {
         favGames= {"Minecraft", "Roblox", "Project Zomboid"};
-        cout << "Let's look at your favorite games.\n";
+        cout << "\nLet's look at your favorite games.\n";
     
         showVec(favGames);
+        cout << "\n";
     }
 
     else{
@@ -71,34 +62,30 @@ int main() {
     
     do{
 
-        cout << "You can 'show all', 'add' , 'edit', 'remove', or 'quit'.\n";
+        cout << "You can 'show all', 'add', 'edit', 'remove', or 'quit'.\n";
         cout << "What would you like to do?\n";
         getline(cin, input);
 
         if(input == "show all") {
             cout << "Ok, let's look at a list of our favorite games again!\n";
-            cout << "Here's that list\n";
+            cout << "Here's that list.\n\n";
             showVec(favGames);
+            cout << "\n";
 
         }
 
         else if(input == "add") {
-            addStringToVec();
-
-            cout << "Would you like to add more games?\n";
+            cout << "What game would you like to add?\n";
             getline(cin, input);
-                if(input == "yes") {
-                    getline(cin, input);
-                    addStringToVec();
-                    
-                }
-                if(input == "no") {
-                    
-                }
-        
-                else {
-                    cout << "I don't understand this command.\n";
-                }
+
+            cout << "Game being added...\n";
+            cout << "Here's that updated list!\n\n";
+            
+            favGames.push_back(input);
+            showVec(favGames);
+            
+
+            cout << "\nIf you'd like to add more games, please run the 'add' command again.\n\n";
 
         }
 
@@ -118,32 +105,37 @@ int main() {
                     cout << "What would you like to change this fav to?\n";
                     getline(cin, input);
 
-                    vec.push_back(input);
-
-                    cout << "Here is your updated list!\n";
+                    *iter = input;
+                    cout << "Here is your updated list!\n\n";
                     showVec(favGames);
+                    cout << "\nIf you'd like to edit more games, please run the 'edit' command again.\n\n";
                 }
             }
         }
 
         else if(input == "remove") {
+            cout << "\n";
             showVec(favGames);
-            cout << "What game would you like to remove from this list?\n";
+            cout << "\nWhat game would you like to remove from this list?\n";
             getline(cin, input);
 
             auto iter = find(favGames.begin(), favGames.end(), input);
 
             if(iter !=favGames.end()){
                 cout << "Game located, removing now.\n";
+                cout << "Let's take a look at the updated list.\n";
                 favGames.erase(iter);
+                cout << "\n";
                 showVec(favGames);
+
+                cout << "\nIf you'd like to remove more games, please run the 'remove' command again.\n\n";
             }
 
         }
 
         else if(input == "quit") {
             cout << "Smell ya later!\n";
-            break;
+            return 0;
         }
 
         else {
