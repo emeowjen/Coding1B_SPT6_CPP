@@ -22,9 +22,18 @@ using namespace std;
 
 // ask for user's name cuz that's cool
     // get name input
+    // if specific user (me), show fav games list
+    // else other user (not me), turn them away
 // introduce usable prompts
-// get prompt input
-// create fav games list
+    // 'show all', 'add', 'edit', 'remove', 'quit'
+// request user input
+// 'show all' command
+    // sorted alphabetically
+// 'add' command
+// 'edit' command
+// 'remove' command
+// 'quit' command
+// return 0 (end)
 
 void showVec (vector<string>& vec) {
     for(int i = 0; i < vec.size(); i++) {
