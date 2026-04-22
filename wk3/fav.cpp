@@ -15,6 +15,7 @@
     // turn in .cpp file to blackboard
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <vector>
 #include <algorithm>
 
@@ -23,7 +24,7 @@ using namespace std;
 // ask for user's name cuz that's cool
     // get name input
     // if specific user (me), show fav games list
-    // else other user (not me), turn them away
+    // else other user, turn them away 
 // introduce usable prompts
     // 'show all', 'add', 'edit', 'remove', 'quit'
 // request user input
@@ -36,6 +37,56 @@ using namespace std;
 // 'quit' command
 // return 0 (end)
 
+void read(string path = "list.txt") {
+    string line;
+    ifstream readFile("list.txt"); // create a new var, try and open a file
+    if(readFile.is_open()) {
+        // cout << "The file is open!\n";
+        while(getline(readFile, line)){
+            cout << line << endl;
+        }
+
+    }
+    else{
+        cout << "I could not open that file.\n";
+    }
+
+    // close file after done reading
+    readFile.close();
+}
+
+void read(vector<string>& vec, string path = "list.txt") {
+    string line;
+    ifstream readFile("list.txt"); // create a new var, try and open a file
+    if(readFile.is_open()) {
+        // cout << "The file is open!\n";
+        while(getline(readFile, line)){
+            vec.push_back(line);
+        }
+
+    }
+    else{
+        cout << "I could not open that file.\n";
+    }
+
+    // close file after done reading
+    readFile.close();
+}
+
+void write(vector<string>& vec, string path = "list.txt") {
+     // cout << "Starting write() function.\n";
+        ofstream writeFile(path);
+
+       if(writeFile.is_open()) {
+        // cout << "The write file is open.\n";
+        for(int i = 0; i < vec.size(); i++) {
+            writeFile << vec[i] << endl;
+        }
+       }
+    writeFile.close();
+    // cout << "End of write function.\n";
+    
+}
 void showVec (vector<string>& vec) {
     for(int i = 0; i < vec.size(); i++) {
         cout << vec[i] << endl;
@@ -55,11 +106,49 @@ int main() {
     vector<string> favGames;
 
     if(playerName == "Elise") {
-        favGames= {"Minecraft", "Roblox", "Project Zomboid", "Terraria", "The Sims 4", "Doki Doki Literature Club"};
-        cout << "\nLet's look at your favorite games.\n";
-    
-        showVec(favGames);
-        cout << "\n";
+        cout << "Would you like to see our list of your favorite games or make your own?\n";
+        cout << "(let's see yours/i want to make my own)\n";
+        string input;
+        getline(cin, input);
+
+        if(input == "let's see yours"){
+            favGames= {"Minecraft", "Roblox", "Project Zomboid", "Terraria", "The Sims 4", "Doki Doki Literature Club"};
+            cout << "\nLet's look at your favorite games.\n";
+
+            showVec(favGames);
+            cout << "\n";
+        }
+
+        else if(input == "i want to make my own") {
+            cout << "Let's start making a new list!\n";
+            vector<string> list;
+            string input = "asdf";
+            string path = "list.txt";
+            path = input;
+
+            read();
+            read(list, path);
+
+            cout << "What would you like to add?\n";
+            cout << "Enter an empty line to stop.\n";
+
+            while(input !="") {
+                cout << "> ";
+                getline(cin, input);
+                if( input == "") {
+                    break;
+                }
+                list.push_back(input);
+            }
+
+            write(list);
+
+            cout << "\n";
+            cout << "Here's your new list!\n";
+            read();
+            read(list, path);
+            cout << "\n";
+        }
     }
 
     else{
