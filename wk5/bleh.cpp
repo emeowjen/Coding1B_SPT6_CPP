@@ -93,7 +93,7 @@ public:
         }
     }
 
-    void changeChargeBy(int amount) {
+    void changeChargeBy(int amount = 1) {
         setCharge(charge += amount);
 
     }
