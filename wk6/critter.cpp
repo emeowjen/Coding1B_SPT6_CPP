@@ -38,29 +38,91 @@ using namespace std;
 
 class baseCritter {
 public:
-    string name;
-    int health;
-    int damage;
-    int hunger;
+    string name = "";
+    int health = 0;
+    int damage = 0;
+    int hunger = 15;
+    int startingHealth;
+    int startingHunger;
 
     // default constructor
 
-
     baseCritter() {
         cout << "A new critter has surfaced!\n";
+
+        name = 
+        health = rand() % 5 +3;
+        startingHealth = health;
+        damage = rand() % 3 + 3;
+        hunger = 0;
+        startingHunger = hunger;
+            if(hunger > 5) {
+                cout << "I'm hungry...\n";
+            }
+
+            else if (hunger > 10) {
+                cout << "I can't do anything, I'm starving!\n";
+            }
+
     }
 
     void hello() {
-        cout << "My name is " <<name << ", tiktik! I have " <<health<< "health ";
-        cout << "and I do " << damage<< "damage, tik!\n";
+        cout << "My name is " <<name << ", tiktik! I have " <<health<< " health ";
+        cout << "and I do " << damage<< " damage, tik!\n";
+    }
+
+    void listen() {
+        cout << "My health is " << health << " and I do " << damage << " damage. ";
+        cout << "My hunger is currently at " << hunger << ".\n";
+        cout << "\n";
     }
 
     void taunt() {
         cout << "I'm going to kill you, tiktik!\n";
     }
 
+    void feed() {
+        cout << "What should we give it?\n";
+        string food;
+        getline(cin, food);
+        cout << "Let's give it some " <<food<< ".\n";
+
+        hunger -= 1;
+        cout << "My hunger has gone down to " << hunger<< ".\n";
+
+    }
+
+    void train() {
+        
+        hunger += 1;
+        cout << "My hunger has gone up by 1 point.\n";
+    }
+
+    void battle() {
+    
+        string playerAction;
+
+        getline(cin, playerAction);
+            if(playerAction == "attack") {
+
+            }
+            else if(playerAction == "heal") {
+
+            }
+            else if(playerAction == "run away") {
+
+            }
+        
+        hunger += 1;
+        cout << "My hunger has gone up by 1 point.\n";
+
+
+    }
+
 
 };
+
+
 
 int main() {
     srand(time(0));
@@ -72,45 +134,56 @@ int main() {
     cout << "Let's meet your critter!\n";
     cout << "\n";
 
+    // introduce critter
+    // let player name critter
+
     string critterName;
     cout << "A small, impish looking entity scuttles out before you...\n";
     cout << "What do you want to name it?\n";
     getline(cin, critterName);
     cout << "Greetings, " <<critterName<< "!\n";
 
-    // baseCritter pet;
-    // pet.name = <<critterName<<;
-    // pet.hello();
-
-    
-    // introduce critter
-    // let player name critter
+    baseCritter pet;
+    pet.name = critterName;
+    pet.hello();
 
     string input;
 
     do {
-        cout << "You can 'feed', 'train', 'listen', 'battle', 'bond', or 'quit'.\n";
+        cout << "You can 'feed', 'train', 'listen', 'battle', or 'quit'.\n";
         cout << "What would you like to do?\n";
         getline(cin, input);
 
         if(input == "feed") {
             cout << "Ok, let's feed " <<critterName<< ".\n";
+
+            pet.feed();
+            
         }
         
         else if(input == "train") {
             cout << "Ok, let's train " <<critterName<< ".\n";
+
+            //pet.train();
+
         }
 
         else if(input == "listen") {
-            cout << "Ok, let's shut up and see if " <<critterName<< "has anything to say.\n";
+            cout << "\n";
+            cout << "Ok, let's shut up and see if " <<critterName<< " has anything to say.\n";
+            pet.listen();
         }
 
         else if(input == "battle") {
             cout << "Let's look around for an opponent.\n";
-        }
+            cout << "\n";
+            cout << "Hark! Is that a dust cloud I spy over yonder?\n";
+            cout << "RUMBLERUMBLERUMBLERUMBLRUMBLE\n";
+            cout << "\n";
 
-        else if(input == "bond") {
-            cout << "Let's spend some time with " <<critterName<< ".\n";
+            //pet.battle();
+
+            //
         }
 
         else if(input == "quit") {
