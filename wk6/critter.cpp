@@ -116,7 +116,6 @@ public:
         hunger += 1;
         cout << "My hunger has gone up by 1 point.\n";
 
-
     }
 
 
