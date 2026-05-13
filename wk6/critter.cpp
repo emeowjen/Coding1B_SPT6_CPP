@@ -28,6 +28,7 @@
 // return 0 (end program)
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <ctime>
@@ -35,6 +36,48 @@
 #include <algorithm>
 
 using namespace std;
+
+void read(string path = "names.txt") {
+    string line;
+    ifstream readFile("names.txt"); // create a new var, try and open a file
+    if(readFile.is_open()) {
+        //cout << "The file is open!\n";
+        while(getline(readFile, line)){
+            cout << line << endl;
+        }
+
+    }
+    else{
+        cout << "I could not open that file.\n";
+    }
+
+    // close file after done reading
+    readFile.close();
+}
+
+void read(vector<string>& vec, string path = "names.txt") {
+    string line;
+    ifstream readFile("names.txt"); // create a new var, try and open a file
+    if(readFile.is_open()) {
+        //cout << "The file is open!\n";
+        while(getline(readFile, line)){
+            vec.push_back(line);
+        }
+
+    }
+    else{
+        cout << "I could not open that file.\n";
+    }
+
+    // close file after done reading
+    readFile.close();
+}
+
+void showVec (vector<string>& vec) {
+    for(int i = 0; i < vec.size(); i++) {
+        cout << vec[i] << endl;
+    }
+}
 
 class baseCritter {
 public:
@@ -51,7 +94,7 @@ public:
         cout << "A new critter has surfaced!\n";
 
         name = 
-        health = rand() % 5 +3;
+        health = rand() % 5 + 3;
         startingHealth = health;
         damage = rand() % 3 + 3;
         hunger = 0;
@@ -93,12 +136,32 @@ public:
     }
 
     void train() {
-        
+        int randomNumber = std::rand()% 6;
+        damage += randomNumber;
+        cout << "My damage has increased by " << randomNumber << ". I now have " << damage << ".\n";
+
         hunger += 1;
-        cout << "My hunger has gone up by 1 point.\n";
+        cout << "My hunger has gone up by 1.\n";
     }
 
+
     void battle() {
+
+        cout << "A new enemy approaches!\n\n";
+        baseCritter pet;
+        vector<string> critterNames;
+        string input = "asdf";
+        string path = "names.txt";
+        path = input;
+
+        vector<baseCritter> horde(1);
+        for(auto& critter : horde) {
+            cout << critter.name << "\n";
+        }
+        random_shuffle(horde.begin(), horde.end());
+
+        read();
+        read(critterNames, path);
     
         string playerAction;
 
@@ -107,10 +170,17 @@ public:
 
             }
             else if(playerAction == "heal") {
-
+                // healing action code
+                int randomNumber = std::rand()% 6;
+                health += randomNumber;
+                cout << "My health has gone up to " << health << ".\n";
             }
             else if(playerAction == "run away") {
-
+                cout << "You and your critter have fled from battle.\n";
+            }
+            else if(health <= 0) {
+                cout << "Your critter has died.\n";
+                return 0;
             }
         
         hunger += 1;
@@ -163,7 +233,7 @@ int main() {
         else if(input == "train") {
             cout << "Ok, let's train " <<critterName<< ".\n";
 
-            //pet.train();
+            pet.train();
 
         }
 
@@ -180,7 +250,7 @@ int main() {
             cout << "RUMBLERUMBLERUMBLERUMBLRUMBLE\n";
             cout << "\n";
 
-            //pet.battle();
+            pet.battle();
 
             //
         }
