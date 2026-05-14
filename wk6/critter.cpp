@@ -120,9 +120,6 @@ public:
         cout << "\n";
     }
 
-    void taunt() {
-        cout << "I'm going to kill you, tiktik!\n";
-    }
 
     void feed() {
         cout << "What should we give it?\n";
@@ -144,45 +141,29 @@ public:
         cout << "My hunger has gone up by 1.\n";
     }
 
+    bool attack() {
+       opponent.health -= damage;
+        cout << name << " has done " << damage << " to ";
+        cout << opponent.name << "!\n";
+
+        if(opponent.health <= 0) return true;
+        else return false;
+    }
+
+    void heal() {
+        int randomNumber = std::rand()% 6;
+        health += randomNumber;
+        cout << "My health has gone up to " << health << ".\n";
+
+        if(health > 10);
+        else return false;
+    }
+
+    void flee() {
+    }
+
 
     void battle() {
-
-        cout << "A new enemy approaches!\n\n";
-        baseCritter pet;
-        vector<string> critterNames;
-        string input = "asdf";
-        string path = "names.txt";
-        path = input;
-
-        vector<baseCritter> horde(1);
-        for(auto& critter : horde) {
-            cout << critter.name << "\n";
-        }
-        random_shuffle(horde.begin(), horde.end());
-
-        read();
-        read(critterNames, path);
-    
-        string playerAction;
-
-        getline(cin, playerAction);
-            if(playerAction == "attack") {
-
-            }
-            else if(playerAction == "heal") {
-                // healing action code
-                int randomNumber = std::rand()% 6;
-                health += randomNumber;
-                cout << "My health has gone up to " << health << ".\n";
-            }
-            else if(playerAction == "run away") {
-                cout << "You and your critter have fled from battle.\n";
-            }
-            else if(health <= 0) {
-                cout << "Your critter has died.\n";
-                return 0;
-            }
-        
         hunger += 1;
         cout << "My hunger has gone up by 1 point.\n";
 
@@ -190,6 +171,8 @@ public:
 
 
 };
+
+
 
 
 
@@ -240,6 +223,8 @@ int main() {
         else if(input == "listen") {
             cout << "\n";
             cout << "Ok, let's shut up and see if " <<critterName<< " has anything to say.\n";
+            
+            // listen to pet stats (health, damage, hunger)
             pet.listen();
         }
 
@@ -250,9 +235,56 @@ int main() {
             cout << "RUMBLERUMBLERUMBLERUMBLRUMBLE\n";
             cout << "\n";
 
-            pet.battle();
+            cout << "A new enemy approaches!\n\n";
+            baseCritter pet;
+            vector<string> critterNames;
+            string input = "asdf";
+            string path = "names.txt";
+            path = input;
 
-            //
+            vector<baseCritter> horde(1);
+            for(auto& critter : horde) {
+            cout << critter.name << "\n";
+            }
+        
+            random_shuffle(horde.begin(), horde.end());
+
+            read();
+            read(critterNames, path);
+            opponent.name = "Menacer";
+            
+        
+            cout << "What will you do? (attack/heal/run away)\n";
+            string playerAction;
+            getline(cin, playerAction);
+
+            if(playerAction == "attack") {
+                // insert enemy in parenthesis pet.attack();
+                pet.attack(opponent)
+
+            }
+
+            else if(playerAction == "heal") {
+                // healing action code
+                pet.heal();
+
+                //int randomNumber = std::rand()% 6;
+                //health += randomNumber;
+                //cout << "My health has gone up to " << health << ".\n";
+            }
+
+            else if(playerAction == "run away") {
+                cout << "You and your critter have fled from battle.\n";
+                //pet.flee();
+            }
+
+            else if(health <= 0) {
+                cout << "Your critter has died.\n";
+                return 0;
+            }
+
+            pet.battle();
+            
         }
 
         else if(input == "quit") {
@@ -265,10 +297,7 @@ int main() {
         }
 
     } while(true);
-    
 
-
-    return 0; // end program
 }
 
 
