@@ -84,9 +84,8 @@ private:
     int startingHealth;
     int startingHunger;
 
-public:
     // default constructor
-    baseCritter(string name, int health, int damage, int hunger, int startingHealth, int startingHunger) {
+    baseCritter() {
         cout << "A new critter has surfaced!\n";
 
         name = 
@@ -103,15 +102,6 @@ public:
                 cout << "I can't do anything, I'm starving!\n";
             }
 
-    }
-
-    baseCritter() {
-        name = "";
-        health = 0;
-        damage = 0;
-        hunger = 15;
-        startingHealth;
-        startingHunger;
     }
 
     void hello() {
