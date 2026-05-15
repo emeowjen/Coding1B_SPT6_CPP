@@ -19,6 +19,7 @@
             // if hunger greater than 5, won't stop talking about how hungry they are 
         // quit - end program 
 // request user input
+
 // return 0 (end program)
 // i tried my best 
 
