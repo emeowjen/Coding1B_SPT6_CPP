@@ -76,7 +76,7 @@ void showVec (vector<string>& vec) {
 }
 
 class baseCritter {
-public:
+private:
     string name = "";
     int health = 0;
     int damage = 0;
@@ -84,8 +84,9 @@ public:
     int startingHealth;
     int startingHunger;
 
+public:
     // default constructor
-    baseCritter() {
+    baseCritter(string name, int health, int damage, int hunger, int startingHealth, int startingHunger) {
         cout << "A new critter has surfaced!\n";
 
         name = 
@@ -102,6 +103,15 @@ public:
                 cout << "I can't do anything, I'm starving!\n";
             }
 
+    }
+
+    baseCritter() {
+        name = "";
+        health = 0;
+        damage = 0;
+        hunger = 15;
+        startingHealth;
+        startingHunger;
     }
 
     void hello() {
