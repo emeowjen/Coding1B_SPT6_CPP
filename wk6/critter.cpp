@@ -6,10 +6,12 @@
     // get name input
 // greet
 // call critter
+// name critter
 // introduce usable prompts
     // 'feed', 'train', 'listen', 'battle', 'bond', 'quit'
         // feed - give critter food
         // train - chance to increase health or damage
+            // adds 1 to hunger bar
         // listen - display health, damage, hunger
         // battle - look for opponents
             // adds 1 to hunger bar 
@@ -17,15 +19,8 @@
             // if hunger greater than 5, won't stop talking about how hungry they are 
         // quit - end program 
 // request user input
-// 'feed' command
-    // overfeed leads to weight gain 
-// 'train' command
-// 'listen' command
-    // double check if that's what they really wanna do
-// 'bond' command
-// 'battle' command
-// 'quit' command
 // return 0 (end program)
+// i tried my best 
 
 #include <iostream>
 #include <fstream>
@@ -89,7 +84,6 @@ public:
     int startingHunger;
 
     // default constructor
-
     baseCritter() {
         cout << "A new critter has surfaced!\n";
 
@@ -117,9 +111,7 @@ public:
     void listen() {
         cout << "My health is " << health << " and I do " << damage << " damage. ";
         cout << "My hunger is currently at " << hunger << ".\n";
-        cout << "\n";
     }
-
 
     void feed() {
         cout << "What should we give it?\n";
@@ -141,8 +133,8 @@ public:
         cout << "My hunger has gone up by 1.\n";
     }
 
-    bool attack() {
-       opponent.health -= damage;
+    bool attack(baseCritter& opponent) {
+        opponent.health -= damage;
         cout << name << " has done " << damage << " to ";
         cout << opponent.name << "!\n";
 
@@ -154,26 +146,19 @@ public:
         int randomNumber = std::rand()% 6;
         health += randomNumber;
         cout << "My health has gone up to " << health << ".\n";
-
-        if(health > 10);
-        else return false;
     }
 
     void flee() {
+        return;
     }
 
-
-    void battle() {
+    void afterBattle() {
         hunger += 1;
         cout << "My hunger has gone up by 1 point.\n";
-
     }
 
 
 };
-
-
-
 
 
 int main() {
@@ -183,21 +168,20 @@ int main() {
 
     getline(cin, playerName);
     cout << "Hello Team Leader " <<playerName<< "!\n";
-    cout << "Let's meet your critter!\n";
+    cout << "Let's meet your team!\n";
     cout << "\n";
 
     // introduce critter
     // let player name critter
 
     string critterName;
-    cout << "A small, impish looking entity scuttles out before you...\n";
+    baseCritter pet;
+    cout << "The small, impish looking entity stares with big eyes...\n";
     cout << "What do you want to name it?\n";
     getline(cin, critterName);
     cout << "Greetings, " <<critterName<< "!\n";
-
-    baseCritter pet;
+    cout << "\n";
     pet.name = critterName;
-    pet.hello();
 
     string input;
 
@@ -207,6 +191,7 @@ int main() {
         getline(cin, input);
 
         if(input == "feed") {
+            cout << "\n";
             cout << "Ok, let's feed " <<critterName<< ".\n";
 
             pet.feed();
@@ -214,9 +199,22 @@ int main() {
         }
         
         else if(input == "train") {
-            cout << "Ok, let's train " <<critterName<< ".\n";
+            cout << "\n";
+            if(pet.hunger > 10) {
+                cout << "I can't do this, I'm too hungry!\n";
+            }
 
-            pet.train();
+            else if(pet.hunger > 5){
+                cout << "Still feeling peckish...\n";
+                pet.train();
+                cout << "\n";
+            }
+
+            else {
+                cout << "Ok, let's train " <<critterName<< ".\n";
+                pet.train();
+                cout << "\n";
+            }
 
         }
 
@@ -226,68 +224,94 @@ int main() {
             
             // listen to pet stats (health, damage, hunger)
             pet.listen();
+
+            if(pet.hunger > 5) {
+                cout << "Honestly, I could go for a bite to eat right now...\n";
+                cout << "\n";
+            }
+
+            if(pet.hunger >10) {
+                cout << "A good team leader would pay attention to their critter's hunger levels.";
+                cout << "AHEM. I'M STARVING HERE!!\n";
+                cout << "\n";
+            }
         }
 
         else if(input == "battle") {
-            cout << "Let's look around for an opponent.\n";
-            cout << "\n";
-            cout << "Hark! Is that a dust cloud I spy over yonder?\n";
-            cout << "RUMBLERUMBLERUMBLERUMBLRUMBLE\n";
             cout << "\n";
 
-            cout << "A new enemy approaches!\n\n";
-            baseCritter pet;
-            vector<string> critterNames;
-            string input = "asdf";
-            string path = "names.txt";
-            path = input;
-
-            vector<baseCritter> horde(1);
-            for(auto& critter : horde) {
-            cout << critter.name << "\n";
-            }
-        
-            random_shuffle(horde.begin(), horde.end());
-
-            read();
-            read(critterNames, path);
-            opponent.name = "Menacer";
-            
-        
-            cout << "What will you do? (attack/heal/run away)\n";
-            string playerAction;
-            getline(cin, playerAction);
-
-            if(playerAction == "attack") {
-                // insert enemy in parenthesis pet.attack();
-                pet.attack(opponent)
-
+            if(pet.hunger > 10) {
+                cout << "I can't do this, I'm too hungry!\n";
             }
 
-            else if(playerAction == "heal") {
-                // healing action code
-                pet.heal();
+            else {
+                if(pet.hunger > 5) {
+                    cout << "Could we get some food after this?\n";
+                }
 
-                //int randomNumber = std::rand()% 6;
-                //health += randomNumber;
-                //cout << "My health has gone up to " << health << ".\n";
+                else {
+                
+                    cout << "Let's look around for an opponent.\n";
+                    cout << "Hark! Is that a dust cloud I spy over yonder?\n";
+                    cout << "\n";
+                    cout << "RUMBLERUMBLERUMBLERUMBLRUMBLE\n";
+                    cout << "\n";
+
+                    vector<string> name;
+                    name = {"Menacer", "Violenta", "Killa"};
+                    string input = "asdf";
+                    string path = "names.txt";
+                    path = input;
+
+
+                    vector<baseCritter> horde(2);
+                    for(auto& critter : horde) {
+                        cout << critter.name << "\n";
+                    }
+                
+                    random_shuffle(horde.begin(), horde.end());
+
+                    auto& a = horde[0];
+                    auto& b = horde[1];
+
+                    
+                    cout << "What will you do? (attack/heal/run away)\n";
+                    string playerAction;
+                    getline(cin, playerAction);
+
+                    if(playerAction == "attack") {
+                        // insert enemy in parenthesis pet.attack();
+                        pet.attack(a);
+
+                    }
+
+                    else if(playerAction == "heal") {
+                        // healing action code
+                        pet.heal();
+
+                        //int randomNumber = std::rand()% 6;
+                        //health += randomNumber;
+                        //cout << "My health has gone up to " << health << ".\n";
+                    }
+
+                    else if(playerAction == "run away") {
+                        cout << "You and your critter have fled from battle.\n";
+                        pet.flee();
+                    }
+
+                    else if(pet.health <= 0) {
+                        cout << "Your critter has died.\n";
+                        return 0;
+                    }
+
+                    pet.afterBattle();
+                
+                }
             }
-
-            else if(playerAction == "run away") {
-                cout << "You and your critter have fled from battle.\n";
-                //pet.flee();
-            }
-
-            else if(health <= 0) {
-                cout << "Your critter has died.\n";
-                return 0;
-            }
-
-            pet.battle();
-            
         }
 
         else if(input == "quit") {
+            cout << "\n";
             cout << "Smell ya later!\n";
             return 0;
         }
